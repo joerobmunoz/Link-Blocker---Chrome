@@ -1,0 +1,22 @@
+Link Blocker - Extension
+
+
+Features:
+
+CRUD Link
+	- Name
+	- Http link
+
+Toggle block
+	- Checkbox (on/off)
+
+Set timer
+	- Date time, then blocks access once timer is reached
+
+Block until ...
+	- Blocks link until set datetime has expired
+
+Rules
+	- Limit on site per day
+
+Audit history?
