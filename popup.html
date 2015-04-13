@@ -4,7 +4,7 @@
  "browser_action" field in manifest.json contains the "default_popup" key with
  value "popup.html".
  -->
-<html>
+<html ng-app="LinkBlockerApp" ng-csp>
   <head>
     <title>Link Blocker</title>
     <style>
@@ -30,8 +30,11 @@
     <script src="popup.js"></script>
   </head>
   <body>
-    <div id="status"></div>
-    <img id="image-result" hidden>
+    <div data-ng-controller="PopUpCtrl">
+      <p ng-repeat="t in test">{{t.desc}}</p>
+      <div id="status"></div>
+      <img id="image-result" hidden>
+    </div>
   </body>
 </html>
 
