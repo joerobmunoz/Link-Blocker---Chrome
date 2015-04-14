@@ -7,12 +7,23 @@
 <html ng-app="LinkBlockerApp" ng-csp>
   <head>
     <title>Link Blocker</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
     <script type="text/javascript" src="angular.js"></script>
     <script type="text/javascript" src="popup.js"></script>
   </head>
-  <body>
+  <body style="width:400px;height:500px;">
     <div ng-controller="PopUpCtrl">
-      <p>{{foos}}</p>
+      <div ng-repeat="e in linkEntities">
+        <div class="form-group">
+          <label>Links</label>
+          <input type="text" ng-model="e.link" class="form-control">
+          <label>Block?</label>
+          <input type="checkbox" ng-model="e.disabled">
+        </div>
+      </div>
     </div>
   </body>
 </html>
