@@ -10,7 +10,7 @@
   },
 
   "browser_action": {
-    "default_icon": "sunglasses-icon-16.png",
+    "default_icon": "img/sunglasses-icon-16.png",
     "default_popup": "popup.html"
   },
 
@@ -19,6 +19,6 @@
     "webNavigation"
   ],
   "icons": { 
-    "128": "sunglasses-icon-128.png"
+    "128": "img/sunglasses-icon-128.png"
   }
 }

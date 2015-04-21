@@ -20,3 +20,8 @@ Rules
 	- Limit on site per day
 
 Audit history?
+	- Record total time/unit (day) of registered site access (when not blocked)
+	- This could be useful for an experiment, to see the behavioral change in 
+		users that participate in blocking (Behavioral mod., CBT, etc.)
+	- Method to aggregate data
+		- Option to send in anonymous usage data.
