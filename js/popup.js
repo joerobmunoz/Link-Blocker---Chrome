@@ -2,29 +2,15 @@
 
 (function () {
 
-	function PopUpCtrl ($scope) {
+	function PopUpCtrl ($scope, LinkService) {
 
 		// Stub data
-		$scope.linkEntities = [
-		  	{
-		  		id: 0,
-		  		disabled: true,
-		  		link: "www.reddit.com"
-		  	},
-		  	{
-		  		id: 1,
-		  		disabled: false,
-		  		link: "www.angular.com"
-		  	},
-		  	{
-		  		id: 2,
-		  		disabled: false,
-		  		link: "www.google.com"
-		  	}
-		];
+		$scope.linkEntities = LinkService.read();
 
 		$scope.create = function (url) {
 			// Stubbed Add till I make the service/resource.
+
+			// LinkService.create
 			if (url) {
 				$scope.linkEntities.push({
 					id: 4,
@@ -35,11 +21,8 @@
 		};
 
 		// CRUD functions
-		$scope.delete = function (idx) {
-			// Call delete method from service
-			// chrome.extension.getBackgroundPage().linkService.delete(id);
-			// var objectBeingDeleted = $scope.linkEntities[idx];
-
+		$scope.delete = function (idx, id) {
+			// Call LinkService.delete
 			// If successful, drop from view array. Splice is recommended.
 			$scope.linkEntities.splice(idx, 1);
 		};
