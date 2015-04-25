@@ -7,17 +7,22 @@
 		// Stub data
 		$scope.linkEntities = LinkService.read();
 
-		$scope.create = function (url) {
-			// Stubbed Add till I make the service/resource.
+		$scope.create = function (inputUrl) {
+			$scope.exists = function (element) {
+				return element.link.toString() == inputUrl.toString()
+			};
 
-			// LinkService.create
-			if (url) {
+			// Filter for existing entries
+			if (inputUrl && !$scope.linkEntities.some($scope.exists)) {
+				// TODO: Call to CRUD Service
+				
+				// Update UI
 				$scope.linkEntities.push({
 					id: 4,
 					disabled: false,
-					link: url
-				})
-			};
+					link: inputUrl
+				});
+			}
 		};
 
 		// CRUD functions
