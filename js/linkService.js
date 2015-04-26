@@ -2,11 +2,21 @@
 
 (function () {
 	function LinkService () {
-		var backgroundService = chrome.extension.getBackgroundPage().linkService;
-
 		return {
-			create: function (url) {
-				console.log("Create called.");
+			create: function (id, url, callback) {
+				var obj = {};
+				obj[id.toString()] = {
+							id: id,
+							disabled: true,
+							link: url
+						};
+
+				chrome.storage.local.set(obj, function () {
+						if (callback) {
+							callback(obj[id.toString()]);
+						}
+					}
+				);
 			},
 			read: function () {
 				console.log("Read called.");

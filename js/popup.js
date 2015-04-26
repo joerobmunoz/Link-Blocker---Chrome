@@ -8,26 +8,23 @@
 		$scope.linkEntities = LinkService.read();
 
 		$scope.create = function (inputUrl) {
-			$scope.exists = function (element) {
-				return element.link.toString() == inputUrl.toString()
+			function exists (element) {
+				return element.link.toString() == inputUrl.toString();
 			};
 
 			// Filter for existing entries
-			if (inputUrl && !$scope.linkEntities.some($scope.exists)) {
-				// TODO: Call to CRUD Service
-				
-				// Update UI
-				$scope.linkEntities.push({
-					id: 4,
-					disabled: false,
-					link: inputUrl
+			if (inputUrl && !$scope.linkEntities.some(exists)) {
+				// Call storage service
+				LinkService.create($scope.linkEntities.length, inputUrl, function (result) {
+					// Update UI array
+					$scope.linkEntities.push(result);
 				});
 			}
 		};
 
 		// CRUD functions
 		$scope.delete = function (idx, id) {
-			// Call LinkService.delete
+			// TODO: Call LinkService.delete
 			// If successful, drop from view array. Splice is recommended.
 			$scope.linkEntities.splice(idx, 1);
 		};
