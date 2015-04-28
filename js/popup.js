@@ -7,10 +7,11 @@
 		// Fetch initial data
 		$scope.linkEntities = [];
 		LinkService.read(null, function (items) {
-			for(var key in items) {
-			    $scope.linkEntities.push(items[key]);
-			}
-			$scope.$apply(); // Apply to force digest outside of cycle
+			$scope.$apply(function () { // Apply to force digest outside of cycle
+				for(var key in items) {
+				    $scope.linkEntities.push(items[key]);
+				}
+			});
 		});
 
 		$scope.create = function (inputUrl) {
@@ -22,18 +23,20 @@
 			if (inputUrl && !$scope.linkEntities.some(exists)) {
 				// Call storage service
 				LinkService.create($scope.linkEntities.length, inputUrl, function (result) {
-					// Update UI array
-					$scope.linkEntities.push(result);
-					$scope.$apply(); // Apply to force digest outside of cycle
+					$scope.$apply(function () { // Apply to force digest outside of cycle
+						// Update UI array
+						$scope.linkEntities.push(result);
+					});
 				});
 			}
 		};
 
-		// CRUD functions
 		$scope.delete = function (idx, id) {
 			LinkService.delete(id, function (idx) {
-				$scope.linkEntities.splice(idx, 1);
-				$scope.$apply(); // Apply to force digest outside of cycle
+				$scope.$apply(function () {
+					// Update UI array
+					$scope.linkEntities.splice(idx, 1);
+				});
 			});
 		};
 	};
