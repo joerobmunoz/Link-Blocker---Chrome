@@ -2,11 +2,11 @@
 
 (function () {
 
-	function PopUpCtrl ($scope, LinkService) {
+	function PopUpCtrl ($scope, StorageService) {
 
 		// Fetch initial data
 		$scope.linkEntities = [];
-		LinkService.read(null, function (items) {
+		StorageService.read(null, function (items) {
 			$scope.$apply(function () { // Apply to force digest outside of cycle
 				for(var key in items) {
 				    $scope.linkEntities.push(items[key]);
@@ -22,7 +22,7 @@
 			// Filter for existing entries
 			if (inputUrl && !$scope.linkEntities.some(exists)) {
 				// Call storage service
-				LinkService.create($scope.linkEntities.length, inputUrl, function (result) {
+				StorageService.create($scope.linkEntities.length, inputUrl, function (result) {
 					$scope.$apply(function () { // Apply to force digest outside of cycle
 						// Update UI array
 						$scope.linkEntities.push(result);
@@ -32,7 +32,7 @@
 		};
 
 		$scope.delete = function (idx, id) {
-			LinkService.delete(id, function (idx) {
+			StorageService.delete(id, function (idx) {
 				$scope.$apply(function () {
 					// Update UI array
 					$scope.linkEntities.splice(idx, 1);

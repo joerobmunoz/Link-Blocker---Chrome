@@ -1,0 +1,39 @@
+body {
+	height:600px;
+	width:400px;
+}
+
+.delete-link {
+	margin-top:5px;
+}
+
+.horizontal-separator {
+	border-bottom: 1px solid #ccc;
+	margin: 30px 5px 15px 5px;
+}
+
+.link-label {
+	margin-top:6px;
+}
+
+#container-main {
+	margin-left:15px;
+	margin-right:15px;
+}
+
+#add-label {
+	margin-top:6px;
+}
+
+#all-sites-header-group {
+	margin-bottom:30px;
+}
+
+#block-link {
+	margin-left:10px;
+}
+
+#site-search {
+	margin-top:18px;
+	text-align: right;
+}

@@ -10,45 +10,47 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/app.css">
 	<!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
 
 	<script type="text/javascript" src="js/vendor/angular.js"></script>
 	<script type="text/javascript" src="js/popup.js"></script>
-	<script type="text/javascript" src="js/linkService.js"></script>
-
+	<script type="text/javascript" src="js/storageService.js"></script>
 	</head>
-  	<body style="width:400px;max-height:600px;">
+
+  	<body>
 		<div ng-controller="PopUpCtrl">
-			<div style = "margin-left:15px;margin-right:15px;"class="container">
+			<div id="container-main" class="container">
 				<form class="form-horizontal">
-				    <h2>Block This Site</h3>
+				    <h2>Block A Site</h3>
 				    <div class="form-group">
-				    	<label style="margin-top:6px;" for="addUrl" class="control-label col-xs-2">URL</label>
+				    	<label id="add-label" for="addUrl" class="control-label col-xs-2">URL</label>
 					    <div class="col-xs-8">
 					    	<input id="addUrl" ng-model="newLink" type="text" class="form-control">
 				    	</div>
 					    <button ng-click="create(newLink)" class="btn btn-primary" class="col-xs-2">Add</button>
 				    </div>
-				    <div style="border-bottom: 1px solid #ccc;margin: 30px 5px 15px 5px;" class="form-group"></div>
-				    <div style="margin-bottom:30px;" class="form-group">
+				    <div class="horizontal-separator form-group"></div>
+				    <!-- <div id="all-sites-header-group" class="form-group"> -->
+				    <div class="form-group">
 					    <div class="h3 col-xs-6">All Sites</div>
 					    <div class="col-xs-6">
-							<input style="margin-top:18px;text-align:right;" class="form-control" type="text" ng-model="query" placeholder="Search...">
+							<input id="site-search" class="form-control" type="text" ng-model="query" placeholder="Search...">
 					    </div>
 				    </div>
 				    <div ng-repeat="e in linkEntities | filter:query">
 				    	<div class="form-group">
-					    	<label style="margin-top:6px;" class="control-label col-xs-2">Link</label>
+					    	<label class="link-label control-label col-xs-2">Link</label>
 					    	<div class="col-xs-9">
 						    	<input type="text" ng-model="e.link" class="form-control">
 							</div>
 							<div class="col-xs-1">
-								<a style="margin-top:5px;" class="close" ng-click="delete($index, e.id)">&times;</a>
+								<a class="delete-link close" ng-click="delete($index, e.id)">&times;</a>
 							</div>
 							<div class="form-group">
 							    <label class="control-label col-xs-2">Block?</label>
 							    <div class="col-xs-10">
-								    <input style="margin-left:10px" type="checkbox" ng-model="e.disabled">
+								    <input id="block-link" type="checkbox" ng-model="e.disabled">
 								</div>
 							</div>
 					    </div>

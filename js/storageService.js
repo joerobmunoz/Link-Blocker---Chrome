@@ -1,7 +1,7 @@
 "use strict";
 
 (function () {
-	function LinkService () {
+	function StorageService () {
 		return {
 			create: function (id, url, callback) {
 				var obj = {};
@@ -41,6 +41,6 @@
 
 	angular
 		.module("LinkBlockerApp")
-		.factory("LinkService", LinkService);
+		.factory("StorageService", StorageService);
 })();
 
