@@ -8,8 +8,9 @@
 		$scope.linkEntities = [];
 		LinkService.read(null, function (items) {
 			for(var key in items) {
-			    scope.linkEntities.push(items[key]);
+			    $scope.linkEntities.push(items[key]);
 			}
+			$scope.$apply(); // Apply to force digest outside of cycle
 		});
 
 		$scope.create = function (inputUrl) {
@@ -23,6 +24,7 @@
 				LinkService.create($scope.linkEntities.length, inputUrl, function (result) {
 					// Update UI array
 					$scope.linkEntities.push(result);
+					$scope.$apply(); // Apply to force digest outside of cycle
 				});
 			}
 		};
@@ -31,6 +33,7 @@
 		$scope.delete = function (idx, id) {
 			LinkService.delete(id, function (idx) {
 				$scope.linkEntities.splice(idx, 1);
+				$scope.$apply(); // Apply to force digest outside of cycle
 			});
 		};
 	};

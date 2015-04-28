@@ -19,8 +19,6 @@
 				);
 			},
 			read: function (url, callback) {
-				console.log("Read called.");
-
 				if (url) {
 					console.log("url undefined")
 					// Fetch via url
