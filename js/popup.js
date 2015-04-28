@@ -31,11 +31,15 @@
 			}
 		};
 
-		$scope.delete = function (idx, id) {
-			StorageService.delete(id, function (idx) {
+		$scope.delete = function (id) {
+			StorageService.delete(id, function () {
+				// Update UI array
 				$scope.$apply(function () {
-					// Update UI array
-					$scope.linkEntities.splice(idx, 1);
+					$scope.linkEntities.forEach(function(item, idx) {
+						if ($scope.linkEntities[idx].id == id) {
+							$scope.linkEntities.splice(idx, 1);
+						}
+					});
 				});
 			});
 		};
