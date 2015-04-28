@@ -18,31 +18,25 @@
 					}
 				);
 			},
-			read: function () {
+			read: function (url, callback) {
 				console.log("Read called.");
-				return [
-				  	{
-				  		id: 0,
-				  		disabled: true,
-				  		link: "www.reddit.com"
-				  	},
-				  	{
-				  		id: 1,
-				  		disabled: false,
-				  		link: "www.angular.com"
-				  	},
-				  	{
-				  		id: 2,
-				  		disabled: false,
-				  		link: "www.google.com"
-				  	}
-				];
+
+				if (url) {
+					console.log("url undefined")
+					// Fetch via url
+				} else {
+					chrome.storage.local.get(null, function (items) {
+						callback(items);
+					});
+				}
 			},
 			update: function () {
 				console.log("Update called.");
 			},
-			delete: function () {
-				console.log("Delete called.");
+			delete: function (id, callback) {
+				chrome.storage.local.remove(id.toString(), function () {
+					callback();
+				});
 			}
 		}
 	}

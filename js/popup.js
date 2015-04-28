@@ -4,8 +4,13 @@
 
 	function PopUpCtrl ($scope, LinkService) {
 
-		// Stub data
-		$scope.linkEntities = LinkService.read();
+		// Fetch initial data
+		$scope.linkEntities = [];
+		LinkService.read(null, function (items) {
+			for(var key in items) {
+			    scope.linkEntities.push(items[key]);
+			}
+		});
 
 		$scope.create = function (inputUrl) {
 			function exists (element) {
@@ -24,9 +29,9 @@
 
 		// CRUD functions
 		$scope.delete = function (idx, id) {
-			// TODO: Call LinkService.delete
-			// If successful, drop from view array. Splice is recommended.
-			$scope.linkEntities.splice(idx, 1);
+			LinkService.delete(id, function (idx) {
+				$scope.linkEntities.splice(idx, 1);
+			});
 		};
 	};
 
