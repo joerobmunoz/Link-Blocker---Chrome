@@ -16,8 +16,10 @@
 
   "permissions": [
     "storage",
+    "http://*/*",
+    "https://*/*",
     "webRequest",
-    "webNavigation"
+    "webRequestBlocking"
   ],
   "icons": { 
     "128": "img/sunglasses-icon-128.png"

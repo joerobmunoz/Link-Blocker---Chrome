@@ -3,23 +3,20 @@
 var linkBlockerApp = angular.module('LinkBlockerApp', []);
 
 linkBlockerApp.controller('backgroundCtrl', function($scope) {
+	function onNavigation (details) {
+		console.log(details.url);
+	}
+
+	chrome.webRequest.onBeforeRequest.addListener(
+        function (details) { 
+        	return {
+        		cancel: true
+        	}; 
+        },
+        {
+        	urls: ["*://www.evil.com/*"]
+        },
+        ["blocking"]);
 });
 
 // Expose CRUD functions
-
-var linkService = (function () {
-
-	return {
-		getAll: function () {
-			console.log('Get all entities.');
-		},
-
-		insert: function (e) {
-			console.log('Insert: ' + e);
-		},
-
-		update: function (id) {
-			console.log('Attempted update: ' + id.toString());
-		}
-	};
-})();

@@ -14,38 +14,47 @@
 			});
 		});
 
+		var createUIElement = function (result) {
+			$scope.$apply(function () {
+				$scope.linkEntities.push(result); // Apply to force digest outside of cycle
+			});
+		};
+
 		$scope.create = function (inputUrl) {
-			function exists (element) {
+			var urlExists = function (element) {
 				return element.link.toString() == inputUrl.toString();
 			};
 
 			// Filter for existing entries
-			if (inputUrl && !$scope.linkEntities.some(exists)) {
+			if (inputUrl && !$scope.linkEntities.some(urlExists)) {
 				// Call storage service
-				StorageService.create($scope.linkEntities.length, inputUrl, function (result) {
-					$scope.$apply(function () { // Apply to force digest outside of cycle
-						// Update UI array
-						$scope.linkEntities.push(result);
-					});
-				});
+				StorageService.create(inputUrl, createUIElement);
+			} else {
+				// If it already exists, help them find it.
+				$scope.query = inputUrl;
 			}
 		};
 
-		$scope.delete = function (id) {
-			StorageService.delete(id, function () {
-				// Update UI array
-				$scope.$apply(function () {
-					$scope.linkEntities.forEach(function(item, idx) {
-						if ($scope.linkEntities[idx].id == id) {
-							$scope.linkEntities.splice(idx, 1);
-						}
-					});
+		var deleteFromUI = function (id) {
+			if (!id) throw "Mising ID parameter. When deleting from UI."
+			// Update UI array
+			var updateUIArray = function () {
+				$scope.linkEntities.forEach(function(item, idx) {
+					if ($scope.linkEntities[idx].id == id) {
+						$scope.linkEntities.splice(idx, 1);
+					}
 				});
-			});
+			};
+
+			$scope.$apply(updateUIArray); // Apply to force digest outside of cycle
+		}
+
+		$scope.delete = function (id) {
+			StorageService.delete(id, deleteFromUI);
 		};
 	};
 
-	angular.module('LinkBlockerApp', []);
+	angular.module("LinkBlockerApp", []);
 
 	angular
 		.module("LinkBlockerApp")
