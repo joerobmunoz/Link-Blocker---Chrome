@@ -15,6 +15,7 @@
 				for(var key in items) {
 				    $scope.linkEntities.push(items[key]);
 				}
+
 				// Update block list
 				chrome.extension.getBackgroundPage().BackgroundService.updateBlockList($scope.linkEntities);
 			});
@@ -23,6 +24,9 @@
 		var createUIElement = function (result) {
 			$scope.$apply(function () {
 				$scope.linkEntities.push(result); // Apply to force digest outside of cycle
+
+				// Update block list
+				chrome.extension.getBackgroundPage().BackgroundService.updateBlockList($scope.linkEntities);
 			});
 		};
 
@@ -50,6 +54,9 @@
 						$scope.linkEntities.splice(idx, 1);
 					}
 				});
+
+				// Update block list
+				chrome.extension.getBackgroundPage().BackgroundService.updateBlockList($scope.linkEntities);
 			};
 
 			$scope.$apply(updateUIArray); // Apply to force digest outside of cycle
