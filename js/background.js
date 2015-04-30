@@ -1,22 +1,49 @@
-'use strict';
+"use strict";
 
-var linkBlockerApp = angular.module('LinkBlockerApp', []);
+// Chrome Filtered Events Documentation:
+// https://developer.chrome.com/extensions/events
 
-linkBlockerApp.controller('backgroundCtrl', function($scope) {
-	function onNavigation (details) {
-		console.log(details.url);
-	}
+var BackgroundService = (function () {
+	function listenerCallback () {
+		return {
+	        	cancel: true
+	    	}; 
+    }
 
-	chrome.webRequest.onBeforeRequest.addListener(
-        function (details) { 
-        	return {
-        		cancel: true
-        	}; 
-        },
-        {
-        	urls: ["*://www.evil.com/*"]
-        },
-        ["blocking"]);
-});
+	return {
+		updateBlockList: function (items) {
+			if (!Array.isArray(items)) {
+				throw "Invalid value for argument 'items'. Expected array, received "
+					.concat(Object.prototype.toString.call(items));
+			}
 
-// Expose CRUD functions
+			var newItems = items.map(function (obj) {
+				console.log("Blocking: ".concat(obj.link));
+				return "*://www.".concat(obj.link,"/*");
+			});
+
+			if (chrome.webRequest.onBeforeRequest.hasListeners()) {
+				chrome.webRequest.onBeforeRequest.removeListener(listenerCallback);
+			}
+
+			chrome.webRequest.onBeforeRequest.addListener(
+				listenerCallback,
+				{
+					urls: items.map(function (obj) {
+						if (obj.disabled === true)
+						return "*://www.".concat(obj.link,"/*");
+					})
+				},
+				["blocking"]);
+			}
+		}
+})();
+
+
+function BackgroundCtrl ($scope) { }
+
+angular.module('LinkBlockerApp', []);
+
+angular
+	.module('LinkBlockerApp')
+	.controller('BackgroundCtrl', BackgroundCtrl);

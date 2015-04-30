@@ -4,6 +4,10 @@
 
 	function PopUpCtrl ($scope, StorageService) {
 
+		var updateBackgroundBlockList = function (items) {
+
+		}
+
 		// Fetch initial data
 		$scope.linkEntities = [];
 		StorageService.read(null, function (items) {
@@ -11,6 +15,8 @@
 				for(var key in items) {
 				    $scope.linkEntities.push(items[key]);
 				}
+				// Update block list
+				chrome.extension.getBackgroundPage().BackgroundService.updateBlockList($scope.linkEntities);
 			});
 		});
 
