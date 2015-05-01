@@ -3,10 +3,6 @@ Link Blocker - Extension
 
 Features:
 
-CRUD Link
-	- Name
-	- Http link
-
 Toggle block
 	- Checkbox (on/off)
 
@@ -17,9 +13,11 @@ Block until ...
 	- Blocks link until set datetime has expired
 
 Rules
-	- Limit on site per day
+	- Limit time on site per day
 
-Audit history?
+Clear Sites (button)
+
+Audit history (RECORDS PAGE)
 	- Record total time/unit (day) of registered site access (when not blocked)
 	- This could be useful for an experiment, to see the behavioral change in 
 		users that participate in blocking (Behavioral mod., CBT, etc.)
