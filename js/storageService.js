@@ -51,15 +51,17 @@
 					});
 				}
 			},
-			update: function () {
-				throw "Update has not yet been implemented."
+			update: function (e, callback) {
+				var obj = {};
+				obj[e.id.toString()] = {
+					id: e.id,
+					disabled: e.disabled,
+					link: e.link
+				}
+
+				chrome.storage.local.set(obj, callback);
 			},
 			delete: function (id, deleteFromUICallback) {
-				if (!id || typeof id !== 'number') {
-					throw "Invalid value for argument 'id'. Expected integer, received "
-					.concat(Object.prototype.toString.call(id));
-				}
-				
 				chrome.storage.local.remove(id.toString(), function () {
 					deleteFromUICallback(id);
 				});

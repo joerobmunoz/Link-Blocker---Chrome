@@ -18,7 +18,6 @@ var BackgroundService = (function () {
 			}
 
 			var newItems = items.map(function (obj) {
-				console.log("Blocking: ".concat(obj.link));
 				return "*://www.".concat(obj.link,"/*");
 			});
 
@@ -31,8 +30,10 @@ var BackgroundService = (function () {
 					listenerCallback,
 					{
 						urls: items.map(function (obj) {
-							if (obj.disabled === true)
-							return "*://www.".concat(obj.link,"/*");
+							if (obj.disabled === true) {
+								console.log("Blocking: ".concat(obj.link));
+								return "*://www.".concat(obj.link,"/*");
+							}
 						})
 					},
 					["blocking"]);

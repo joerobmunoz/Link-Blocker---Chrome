@@ -8,6 +8,9 @@
 		$scope.linkEntities = [];
 		StorageService.read(null, function (items) {
 			$scope.$apply(function () { // Apply to force digest outside of cycle
+
+				// chrome.storage.local.clear(null);
+
 				for(var key in items) {
 				    $scope.linkEntities.push(items[key]);
 				}
@@ -43,7 +46,6 @@
 		};
 
 		var deleteFromUI = function (id) {
-			//if (!id) throw "Mising ID parameter. When deleting from UI."
 			// Update UI array
 			var updateUIArray = function () {
 				$scope.linkEntities.forEach(function(item, idx) {
@@ -61,6 +63,15 @@
 
 		$scope.delete = function (id) {
 			StorageService.delete(id, deleteFromUI);
+		};
+
+		$scope.update = function (obj) {
+			StorageService.update(obj, function () {
+				// Update block list
+				$scope.$apply(function () {
+					chrome.extension.getBackgroundPage().BackgroundService.updateBlockList($scope.linkEntities);
+				});
+			});
 		};
 	};
 
