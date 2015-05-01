@@ -26,17 +26,19 @@ var BackgroundService = (function () {
 				chrome.webRequest.onBeforeRequest.removeListener(listenerCallback);
 			}
 
-			chrome.webRequest.onBeforeRequest.addListener(
-				listenerCallback,
-				{
-					urls: items.map(function (obj) {
-						if (obj.disabled === true)
-						return "*://www.".concat(obj.link,"/*");
-					})
-				},
-				["blocking"]);
+			if (items.length > 0) {
+				chrome.webRequest.onBeforeRequest.addListener(
+					listenerCallback,
+					{
+						urls: items.map(function (obj) {
+							if (obj.disabled === true)
+							return "*://www.".concat(obj.link,"/*");
+						})
+					},
+					["blocking"]);
 			}
 		}
+	}
 })();
 
 

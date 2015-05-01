@@ -55,6 +55,11 @@
 				throw "Update has not yet been implemented."
 			},
 			delete: function (id, deleteFromUICallback) {
+				if (!id || typeof id !== 'number') {
+					throw "Invalid value for argument 'id'. Expected integer, received "
+					.concat(Object.prototype.toString.call(id));
+				}
+				
 				chrome.storage.local.remove(id.toString(), function () {
 					deleteFromUICallback(id);
 				});

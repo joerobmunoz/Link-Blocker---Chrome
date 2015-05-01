@@ -4,10 +4,6 @@
 
 	function PopUpCtrl ($scope, StorageService) {
 
-		var updateBackgroundBlockList = function (items) {
-
-		}
-
 		// Fetch initial data
 		$scope.linkEntities = [];
 		StorageService.read(null, function (items) {
@@ -22,8 +18,9 @@
 		});
 
 		var createUIElement = function (result) {
-			$scope.$apply(function () {
-				$scope.linkEntities.push(result); // Apply to force digest outside of cycle
+			$scope.$apply(function () { // Apply to force digest outside of cycle
+				$scope.linkEntities.push(result);
+				$scope.newLink = ""; // Clear input
 
 				// Update block list
 				chrome.extension.getBackgroundPage().BackgroundService.updateBlockList($scope.linkEntities);
@@ -46,7 +43,7 @@
 		};
 
 		var deleteFromUI = function (id) {
-			if (!id) throw "Mising ID parameter. When deleting from UI."
+			//if (!id) throw "Mising ID parameter. When deleting from UI."
 			// Update UI array
 			var updateUIArray = function () {
 				$scope.linkEntities.forEach(function(item, idx) {
