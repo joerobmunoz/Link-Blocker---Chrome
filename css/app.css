@@ -1,10 +1,14 @@
 body {
-	height:600px;
+	min-height:300px;
 	width:400px;
 }
 
 .delete-link {
 	margin-top:5px;
+}
+
+.form-group-sub {
+	margin-top:-10px;
 }
 
 .horizontal-separator {
@@ -27,10 +31,6 @@ body {
 
 #all-sites-header-group {
 	margin-bottom:30px;
-}
-
-#block-link {
-	margin-left:10px;
 }
 
 #site-search {

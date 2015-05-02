@@ -39,18 +39,18 @@
 				    </div>
 				    <div ng-repeat="e in linkEntities | filter:query">
 				    	<div class="form-group">
-					    	<label class="link-label control-label col-xs-2">Link</label>
+					    	<label class="control-label col-xs-2 text-right link-label">Link</label>
 					    	<div class="col-xs-9">
 						    	<input type="text" ng-disabled="true" ng-model="e.link" class="form-control">
 							</div>
 							<div class="col-xs-1">
 								<a class="delete-link close" ng-click="delete(e.id)">&times;</a>
 							</div>
-							<div class="form-group">
-							    <label class="control-label col-xs-2">Block?</label>
-							    <div class="col-xs-10">
-								    <input id="block-link" type="checkbox" ng-model="e.disabled" ng-click="update(e)">
-								</div>
+						</div>
+						<div class="form-group form-group-sub">
+						    <label class="control-label col-xs-2 text-right">Block?</label>
+						    <div class="col-xs-10">
+							    <input type="checkbox" ng-model="e.disabled" ng-click="update(e)">
 							</div>
 					    </div>
 				    </div>
