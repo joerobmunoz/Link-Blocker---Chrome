@@ -30,7 +30,7 @@ var BackgroundService = (function () {
 					listenerCallback,
 					{
 						urls: items.map(function (obj) {
-							if (obj.disabled === true) {
+							if (obj.disableTime > Date()) {
 								console.log("Blocking: ".concat(obj.link));
 								return "*://www.".concat(obj.link,"/*");
 							}

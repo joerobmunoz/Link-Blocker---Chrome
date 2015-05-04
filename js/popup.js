@@ -73,6 +73,18 @@
 				});
 			});
 		};
+
+		Date.prototype.addHours= function(h){
+		    this.setHours(this.getHours()+h);
+		    return this;
+		}
+		$scope.updateTime = function (e) {
+			if (typeof e.disableTill === "undefined" || e.disableTill <= Date()) {
+				e.disableTill = new Date().addHours(1);
+			} else {
+				e.disableTill = e.disableTill.addHours(1);
+			}
+		}
 	};
 
 	angular.module("LinkBlockerApp", []);

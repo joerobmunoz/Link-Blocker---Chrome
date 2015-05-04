@@ -27,7 +27,7 @@
 					var obj = {};
 					obj[id.toString()] = {
 							id: id,
-							disabled: true,
+							disableTill: "",
 							link: url
 						};
 
@@ -55,7 +55,7 @@
 				var obj = {};
 				obj[e.id.toString()] = {
 					id: e.id,
-					disabled: e.disabled,
+					disableTill: e.disableTill,
 					link: e.link
 				}
 

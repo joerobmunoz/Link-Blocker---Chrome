@@ -50,7 +50,9 @@
 						<div class="form-group form-group-sub">
 						    <label class="control-label col-xs-2 text-right">Block?</label>
 						    <div class="col-xs-10">
-							    <input type="checkbox" ng-model="e.disabled" ng-click="update(e)">
+							    <!-- <input type="checkbox" ng-model="e.disableTime" ng-click="update(e)"> -->
+							    <button class="btn btn-primary" ng-click="updateTime(e)" class="col-xs-2">+1 Hour</button>
+							    <div class="pull-right">{{(e.disableTime-Date()).toLocaleTimeString()}}</div>
 							</div>
 					    </div>
 				    </div>
