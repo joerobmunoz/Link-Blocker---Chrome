@@ -2,6 +2,11 @@
 
 (function () {
 
+	Date.prototype.addHours = function (h) {
+    	this.setHours(this.getHours()+h);
+    	return this;
+	}
+
 	function PopUpCtrl ($scope, StorageService) {
 
 		// Fetch initial data
@@ -12,7 +17,12 @@
 				// chrome.storage.local.clear(null);
 
 				for(var key in items) {
-				    $scope.linkEntities.push(items[key]);
+					console.log(new Date(items[key].disableTill));
+				    $scope.linkEntities.push({
+				    	id: items[key].id,
+						disableTill: items[key].disableTill !== "" ? new Date(items[key].disableTill) : "",
+						link: items[key].link
+				    });
 				}
 
 				// Update block list
@@ -46,7 +56,6 @@
 		};
 
 		var deleteFromUI = function (id) {
-			// Update UI array
 			var updateUIArray = function () {
 				$scope.linkEntities.forEach(function(item, idx) {
 					if ($scope.linkEntities[idx].id == id) {
@@ -65,26 +74,14 @@
 			StorageService.delete(id, deleteFromUI);
 		};
 
-		$scope.update = function (obj) {
-			StorageService.update(obj, function () {
+		$scope.update = function (e) {
+			StorageService.update(e, function () {
 				// Update block list
 				$scope.$apply(function () {
 					chrome.extension.getBackgroundPage().BackgroundService.updateBlockList($scope.linkEntities);
 				});
 			});
 		};
-
-		Date.prototype.addHours= function(h){
-		    this.setHours(this.getHours()+h);
-		    return this;
-		}
-		$scope.updateTime = function (e) {
-			if (typeof e.disableTill === "undefined" || e.disableTill <= Date()) {
-				e.disableTill = new Date().addHours(1);
-			} else {
-				e.disableTill = e.disableTill.addHours(1);
-			}
-		}
 	};
 
 	angular.module("LinkBlockerApp", []);

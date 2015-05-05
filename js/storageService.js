@@ -46,16 +46,22 @@
 				if (id) {
 					throw "Read(Id) method not yet implemented."
 				} else {
-					chrome.storage.local.get(null, function (items) {
+					chrome.storage.local.get(null, function readCallback (items) {
 						callback(items);
 					});
 				}
 			},
 			update: function (e, callback) {
+				if (typeof e.disableTill === "undefined" || e.disableTill <= Date()) {
+					e.disableTill = new Date().addHours(1);
+				} else {
+					e.disableTill = e.disableTill.addHours(1);
+				}
+
 				var obj = {};
 				obj[e.id.toString()] = {
 					id: e.id,
-					disableTill: e.disableTill,
+					disableTill: +new Date(e.disableTill), // Number casting
 					link: e.link
 				}
 

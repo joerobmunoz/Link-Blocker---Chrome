@@ -17,20 +17,17 @@ var BackgroundService = (function () {
 					.concat(Object.prototype.toString.call(items));
 			}
 
-			var newItems = items.map(function (obj) {
-				return "*://www.".concat(obj.link,"/*");
-			});
-
 			if (chrome.webRequest.onBeforeRequest.hasListeners()) {
 				chrome.webRequest.onBeforeRequest.removeListener(listenerCallback);
 			}
 
 			if (items.length > 0) {
+				var d = new Date();
 				chrome.webRequest.onBeforeRequest.addListener(
 					listenerCallback,
 					{
 						urls: items.map(function (obj) {
-							if (obj.disableTime > Date()) {
+							if (typeof obj.disableTill !== "undefined" && new Date(obj.disableTill) > d) {
 								console.log("Blocking: ".concat(obj.link));
 								return "*://www.".concat(obj.link,"/*");
 							}
@@ -45,8 +42,8 @@ var BackgroundService = (function () {
 
 function BackgroundCtrl ($scope) { }
 
-angular.module('LinkBlockerApp', []);
+angular.module("LinkBlockerApp", []);
 
 angular
-	.module('LinkBlockerApp')
-	.controller('BackgroundCtrl', BackgroundCtrl);
+	.module("LinkBlockerApp")
+	.controller("BackgroundCtrl", BackgroundCtrl);
