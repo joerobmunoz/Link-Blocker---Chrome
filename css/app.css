@@ -20,6 +20,10 @@ body {
 	margin-top:6px;
 }
 
+.sub-items {
+	font-size:11px;
+}
+
 #container-main {
 	margin-left:15px;
 	margin-right:15px;

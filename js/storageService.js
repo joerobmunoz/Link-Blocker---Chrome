@@ -51,11 +51,11 @@
 					});
 				}
 			},
-			update: function (e, callback) {
+			update: function (e, updateFunction, callback) {
 				if (typeof e.disableTill === "undefined" || e.disableTill <= Date()) {
 					e.disableTill = new Date().addHours(1);
 				} else {
-					e.disableTill = e.disableTill.addHours(1);
+					e = updateFunction(e);
 				}
 
 				var obj = {};
