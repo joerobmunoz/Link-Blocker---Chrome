@@ -53,10 +53,10 @@
 			},
 			update: function (e, updateFunction, callback) {
 				if (typeof e.disableTill === "undefined" || e.disableTill <= Date()) {
-					e.disableTill = new Date().addHours(1);
-				} else {
-					e = updateFunction(e);
+					e.disableTill = new Date();
 				}
+
+				e = updateFunction(e);	
 
 				var obj = {};
 				obj[e.id.toString()] = {

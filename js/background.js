@@ -27,7 +27,7 @@ var BackgroundService = (function () {
 					listenerCallback,
 					{
 						urls: items.map(function (obj) {
-							if (typeof obj.disableTill !== "undefined" && new Date(obj.disableTill) > d) {
+							if (typeof obj.disableTill !== "undefined" || new Date(obj.disableTill) > new Date()) {
 								console.log("Blocking: ".concat(obj.link));
 								return "*://www.".concat(obj.link,"/*");
 							}

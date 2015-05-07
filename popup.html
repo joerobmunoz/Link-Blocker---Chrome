@@ -13,8 +13,8 @@
 	<link rel="stylesheet" href="css/app.css">
 
 	<script type="text/javascript" src="js/vendor/angular.js"></script>
-	<script type="text/javascript" src="js/date.js"></script>
 	<script type="text/javascript" src="js/popup.js"></script>
+	<script type="text/javascript" src="js/date.js"></script>
 	<script type="text/javascript" src="js/storageService.js"></script>
 	</head>
 
@@ -56,7 +56,7 @@
 					    </div>
 					    <div class="form-group form-group-sub">
 						    <div class="col-xs-8 col-xs-offset-2 sub-items">
-						    	{{e.disableTill.toTimeRemainingString()}}
+						    	{{e.disableTill|dateText}}
 						    </div>
 					    </div>
 				    </div>
