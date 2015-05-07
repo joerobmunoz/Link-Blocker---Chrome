@@ -72,13 +72,20 @@
 			});
 		};
 
-		$scope.addTimeInterval = function (e) {
-			return $interval(function() {
+		var addTimeInterval = function (e) {
+			$interval(function() {
 				if (e.disableTill !== "") {
 					e.disableTill = e.disableTill.timeRemaining();
 					console.log(e.disableTill.toTimeRemainingString());
+
+					// if time is expired, remove from block list
+					if (e.disableTill.expired()) {
+						chrome.extension.getBackgroundPage().BackgroundService.updateBlockList($scope.linkEntities);
+					}
 				}
 			}, 1000); // save intervals so that they can be deleted on UI delete
+
+			return e;
 		};
 
 		// Fetch initial data
@@ -90,8 +97,8 @@
 
 				for (var key in items) {
 					var ent = EntityService.generateEntity(items[key]);
-					$scope.linkEntities.push(ent);
-				    // $scope.addTimeInterval(ent);
+					$scope.linkEntities.push(addTimeInterval(ent));
+					// $scope.linkEntities.push(ent);
 				}
 
 				// Update block list

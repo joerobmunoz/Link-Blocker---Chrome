@@ -7,6 +7,17 @@
     	this.setMinutes(this.getMinutes() + m);
     	return this;
 	}
+	Date.prototype.expired = function () {
+		if (typeof this.hoursRemaining === "undefined" || typeof this.minutesRemaining === "undefined" || typeof this.secondsRemaining === "undefined") {
+			throw "Remaining time properties are undefined. Call 'timeRemaining' on date before evaluating it's expiration."
+		}
+
+		if (this.hoursRemaining === 0 || this.minutesRemaining === 0 || this.secondsRemaining === 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	Date.prototype.timeRemaining = function () {
 		var d = new Date();
 		this.hoursRemaining = 0;
@@ -23,7 +34,7 @@
 		return this;
 	}
 	Date.prototype.toTimeRemainingString = function () {
-		this.timeRemaining();
+		// this.timeRemaining();
 		if (this.hoursRemaining !== 0 || this.minutesRemaining !== 0 || this.secondsRemaining !== 0) {
 			var timeString = "";
 			if (this.hoursRemaining > 0) {
@@ -38,7 +49,10 @@
 	
 	angular.module('LinkBlockerApp').filter('dateText', function() {
     	return function(date) {
-    		return date === "" ? "" : date.toTimeRemainingString();
+    		return date === "" ? "" : (function () {
+    			date.timeRemaining();
+    			return date.toTimeRemainingString();
+    		})();
     	};
     });
 })();
