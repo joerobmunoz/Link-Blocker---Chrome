@@ -9,7 +9,6 @@
 				// Assign the next highest available integer as the ID
 				var max = 0;
 				for(var key in items) {
-					console.log(items[key].id.toString());
 					if (items[key].id >= max) {
 						max = items[key].id + 1;
 					}
@@ -80,3 +79,23 @@
 		.factory("StorageService", StorageService);
 })();
 
+(function () {
+	function EntityService () {
+		return {
+				generateEntity :function (e) {
+				if (typeof e === "undefined") throw "Entity parameter for generator is undefined.";
+
+				return {
+					id: e.id,
+					// Chrome local storage will not fetch empty strings.
+					disableTill: typeof e.disableTill === "undefined" || e.disableTill === "" ? "" : new Date(e.disableTill),
+					link: e.link
+				}
+	 		}
+	 	}
+	}
+
+	angular
+		.module("LinkBlockerApp")
+		.factory("EntityService", EntityService);
+})();

@@ -1,13 +1,8 @@
 "use strict";
 
 (function () {
-	function PopUpCtrl ($scope, StorageService) {
-		var addTimeInterval = function (e) {
-			return $interval(function(e) {
-
-			}, 1000); // save intervals so that they can be deleted on UI delete
-		},
-		createUIElement = function (result) {
+	function PopUpCtrl ($scope, $interval, EntityService, StorageService) {
+		var createUIElement = function updateUIOnCreate (result) {
 			$scope.$apply(function () { // Apply to force digest outside of cycle
 				$scope.linkEntities.push(result);
 				$scope.newLink = ""; // Clear input
@@ -15,7 +10,15 @@
 				// Update block list
 				chrome.extension.getBackgroundPage().BackgroundService.updateBlockList($scope.linkEntities);
 			});
-		};
+		},
+		updateHourCallback = function (e) {
+			e.disableTill = e.disableTill.addHours(1);
+			return e;
+		},
+		updateMinutesCallback = function (e) {
+			e.disableTill = e.disableTill.addMinutes(30);
+			return e;
+		}
 
 		$scope.create = function (inputUrl) {
 			var urlExists = function (element) {
@@ -51,16 +54,6 @@
 			StorageService.delete(id, deleteFromUI);
 		};
 
-		var updateHourCallback = function (e) {
-				e.disableTill = e.disableTill.addHours(1);
-				return e;
-			},
-			updateMinutesCallback = function (e) {
-				e.disableTill = e.disableTill.addMinutes(30);
-				return e;
-			}
-
-
 		$scope.updateHour = function (e) {
 			StorageService.update(e, updateHourCallback, function () {
 				// Update block list
@@ -79,6 +72,15 @@
 			});
 		};
 
+		$scope.addTimeInterval = function (e) {
+			return $interval(function() {
+				if (e.disableTill !== "") {
+					e.disableTill = e.disableTill.timeRemaining();
+					console.log(e.disableTill.toTimeRemainingString());
+				}
+			}, 1000); // save intervals so that they can be deleted on UI delete
+		};
+
 		// Fetch initial data
 		$scope.linkEntities = [];
 		StorageService.read(null, function (items) {
@@ -86,12 +88,10 @@
 
 				// chrome.storage.local.clear(null);
 
-				for(var key in items) {
-				    $scope.linkEntities.push({
-				    	id: items[key].id,
-						disableTill: items[key].disableTill !== "" ? new Date(items[key].disableTill) : "",
-						link: items[key].link
-				    });
+				for (var key in items) {
+					var ent = EntityService.generateEntity(items[key]);
+					$scope.linkEntities.push(ent);
+				    // $scope.addTimeInterval(ent);
 				}
 
 				// Update block list

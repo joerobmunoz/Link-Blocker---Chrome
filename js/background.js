@@ -22,18 +22,25 @@ var BackgroundService = (function () {
 			}
 
 			if (items.length > 0) {
-				var d = new Date();
-				chrome.webRequest.onBeforeRequest.addListener(
-					listenerCallback,
-					{
-						urls: items.map(function (obj) {
-							if (typeof obj.disableTill !== "undefined" || new Date(obj.disableTill) > new Date()) {
-								console.log("Blocking: ".concat(obj.link));
-								return "*://www.".concat(obj.link,"/*");
-							}
-						})
-					},
-					["blocking"]);
+				var d = new Date(),
+					urlGroup = items.filter(function (e) {
+						if (typeof e.disableTill === "undefined") {
+							throw "Object date is undefined.\nThis must always be a date or an empty string."
+						}
+						return e.disableTill !== "" && new Date(e.disableTill) > d
+					}).map(function (e) {
+						console.log("Blocking: ".concat(e.link));
+						return "*://www.".concat(e.link,"/*");
+					});
+
+				if (urlGroup.length > 0) {
+					chrome.webRequest.onBeforeRequest.addListener(
+						listenerCallback,
+						{
+							urls: urlGroup
+						},
+						["blocking"]);
+				}
 			}
 		}
 	}

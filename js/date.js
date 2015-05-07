@@ -19,6 +19,8 @@
 			this.hoursRemaining = Math.floor(seconds/3600);
 			this.secondsRemaining = seconds % 60;
 		}
+
+		return this;
 	}
 	Date.prototype.toTimeRemainingString = function () {
 		this.timeRemaining();

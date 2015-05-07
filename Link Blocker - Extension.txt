@@ -3,14 +3,13 @@ Link Blocker - Extension
 
 Features:
 
-Toggle block
-	- Checkbox (on/off)
-
 Set timer
-	- Date time, then blocks access once timer is reached
-
-Block until ...
 	- Blocks link until set datetime has expired
+
+Grunt workflow
+	- File structure
+	- Minification
+	- Update Github build steps
 
 Rules
 	- Limit time on site per day
