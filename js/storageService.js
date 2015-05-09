@@ -88,7 +88,7 @@
 				return {
 					id: e.id,
 					// Chrome local storage will not fetch empty strings.
-					disableTill: typeof e.disableTill === "undefined" || e.disableTill === "" ? "" : new Date(e.disableTill),
+					disableTill: typeof e.disableTill === "undefined" || e.disableTill === "" ? "" : new Date(e.disableTill).timeRemaining(),
 					link: e.link
 				}
 	 		}

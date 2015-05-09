@@ -12,7 +12,7 @@
 			throw "Remaining time properties are undefined. Call 'timeRemaining' on date before evaluating it's expiration."
 		}
 
-		if (this.hoursRemaining === 0 || this.minutesRemaining === 0 || this.secondsRemaining === 0) {
+		if (this.hoursRemaining === 0 && this.minutesRemaining === 0 && this.secondsRemaining === 0) {
 			return true;
 		} else {
 			return false;
@@ -34,7 +34,6 @@
 		return this;
 	}
 	Date.prototype.toTimeRemainingString = function () {
-		// this.timeRemaining();
 		if (this.hoursRemaining !== 0 || this.minutesRemaining !== 0 || this.secondsRemaining !== 0) {
 			var timeString = "";
 			if (this.hoursRemaining > 0) {
