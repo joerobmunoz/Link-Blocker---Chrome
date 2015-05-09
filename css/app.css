@@ -8,7 +8,8 @@ body {
 }
 
 .filtered-group {
-	font-size: 40px !important;
+	/*sunflower*/
+	background-color: rgba(241, 196, 15, 0.2);
 }
 
 .form-group-sub {

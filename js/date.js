@@ -35,26 +35,4 @@
 
 		return this;
 	}
-	Date.prototype.toTimeRemainingString = function toTimeRemainingString () {
-		// if (this.hoursRemaining !== 0 || this.minutesRemaining !== 0 || this.secondsRemaining !== 0) {
-		if (!this.expired()) {
-			var timeString = "";
-			if (this.hoursRemaining > 0) {
-				timeString = timeString.concat(this.hoursRemaining, " hours, ");
-			}
-		
-			return timeString.concat(this.minutesRemaining, " min, ", this.secondsRemaining, " sec")
-		} else {
-			return "";
-		}
-	}
-	
-	angular.module('LinkBlockerApp').filter('dateText', function dateFilter () {
-    	return function dateFilerApply (date) {
-    		return date === "" ? "" : (function () {
-    			date.timeRemaining();
-    			return date.toTimeRemainingString();
-    		})();
-    	};
-    });
 })();
