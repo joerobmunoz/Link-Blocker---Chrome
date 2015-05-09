@@ -3,7 +3,7 @@
 (function () {
 	function PopUpCtrl ($scope, $interval, EntityService, StorageService) {
 		var addTimeInterval = function addTimeInterval (e) {
-			$interval(function () {
+			$interval(function addTimeLoop () {
 				$scope.linkEntities.forEach(function (e) {
 					if (typeof e.disableTill === "undefined") throw "disableTill is undefined";
 
@@ -14,7 +14,7 @@
 			}, 1000);
 		},
 		createUIElement = function updateUIOnCreate (result) {
-			$scope.$apply(function () { // Apply to force digest outside of cycle
+			$scope.$apply(function updateUIOnCreateApply () { // Apply to force digest outside of cycle
 				$scope.linkEntities.push(result);
 				$scope.newLink = ""; // Clear input
 
@@ -23,7 +23,7 @@
 			});
 		},
 		deleteFromUI = function deleteFromUI (id) {
-			var updateUIArray = function () {
+			var updateUIArray = function updateUIArray () {
 				$scope.linkEntities.forEach(function(item, idx) {
 					if ($scope.linkEntities[idx].id == id) {
 						$scope.linkEntities.splice(idx, 1);
@@ -45,8 +45,8 @@
 			return e;
 		}
 
-		$scope.create = function (inputUrl) {
-			var urlExists = function (element) {
+		$scope.create = function create (inputUrl) {
+			var urlExists = function urlExists (element) {
 				return element.link.toString() == inputUrl.toString();
 			};
 
@@ -60,25 +60,23 @@
 			}
 		};
 
-		$scope.delete = function (id) {
+		$scope.delete = function deleteCall (id) {
 			StorageService.delete(id, deleteFromUI);
 		};
 
-		$scope.updateHour = function (e) {
+		$scope.updateHour = function updateHour (e) {
 			StorageService.update(e, updateHourCallback, function () {
 				// Update block list
-				$scope.$apply(function () {
-					e.disableTill.timeRemaining();
+				$scope.$apply(function updateHourApply () {
 					chrome.extension.getBackgroundPage().BackgroundService.updateBlockList($scope.linkEntities);
 				});
 			});
 		};
 
-		$scope.updateMinutes = function (e) {
+		$scope.updateMinutes = function updateMinutes (e) {
 			StorageService.update(e, updateMinutesCallback, function () {
 				// Update block list
-				$scope.$apply(function () {
-					e.disableTill.timeRemaining();
+				$scope.$apply(function updateMinutesApply () {
 					chrome.extension.getBackgroundPage().BackgroundService.updateBlockList($scope.linkEntities);
 				});
 			});
@@ -86,15 +84,14 @@
 
 		// Fetch initial data
 		$scope.linkEntities = [];
-		StorageService.read(null, function (items) {
-			$scope.$apply(function () { // Apply to force digest outside of cycle
+		StorageService.read(null, function readCallback (items) {
+			$scope.$apply(function addEntitiesToUI () { // Apply to force digest outside of cycle
 
 				// chrome.storage.local.clear(null);
 
 				for (var key in items) {
 					var ent = EntityService.generateEntity(items[key]);
 					$scope.linkEntities.push(ent)
-					ent.disableTill.timeRemaining();
 				}
 
 				addTimeInterval();

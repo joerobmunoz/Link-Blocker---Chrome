@@ -2,7 +2,7 @@
 
 (function () {
 	function StorageService () {
-		var incrementMaxId = function (createItemCallback) {
+		var incrementMaxId = function incrementMaxId (createItemCallback) {
 			if (typeof createItemCallback === "undefined") throw "No callback specified";
 
 			chrome.storage.local.get(null, function (items) {
@@ -19,7 +19,7 @@
 		};
 
 		return {
-			create: function (url, updateUIArrayCallback) {
+			create: function create (url, updateUIArrayCallback) {
 				if (typeof updateUIArrayCallback === "undefined") throw "No callback specified";
 
 				var createItem = function (id) {
@@ -41,7 +41,7 @@
 
 				incrementMaxId(createItem);
 			},
-			read: function (id, callback) {
+			read: function read (id, callback) {
 				if (id) {
 					throw "Read(Id) method not yet implemented."
 				} else {
@@ -50,7 +50,7 @@
 					});
 				}
 			},
-			update: function (e, updateFunction, callback) {
+			update: function update (e, updateFunction, callback) {
 				if (typeof e.disableTill === "undefined" || e.disableTill <= Date()) {
 					e.disableTill = new Date();
 				}
@@ -66,7 +66,7 @@
 
 				chrome.storage.local.set(obj, callback);
 			},
-			delete: function (id, deleteFromUICallback) {
+			delete: function deleteCall (id, deleteFromUICallback) {
 				chrome.storage.local.remove(id.toString(), function () {
 					deleteFromUICallback(id);
 				});
@@ -77,25 +77,4 @@
 	angular
 		.module("LinkBlockerApp")
 		.factory("StorageService", StorageService);
-})();
-
-(function () {
-	function EntityService () {
-		return {
-				generateEntity :function (e) {
-				if (typeof e === "undefined") throw "Entity parameter for generator is undefined.";
-
-				return {
-					id: e.id,
-					// Chrome local storage will not fetch empty strings.
-					disableTill: typeof e.disableTill === "undefined" || e.disableTill === "" ? "" : new Date(e.disableTill).timeRemaining(),
-					link: e.link
-				}
-	 		}
-	 	}
-	}
-
-	angular
-		.module("LinkBlockerApp")
-		.factory("EntityService", EntityService);
 })();

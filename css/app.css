@@ -43,18 +43,6 @@ body {
 }
 
 /* Bootstrap 3 Overrides */
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
-
-  background-color: #A6A8C1;
-  border-color: #31347B;
-
- }
-
-.btn
-{
-  background-color: #9F418F;
-  border-color: #9F418F;
-}
 
 * {
 	-webkit-border-radius: 0 !important;

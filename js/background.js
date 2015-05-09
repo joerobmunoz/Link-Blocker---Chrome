@@ -11,7 +11,7 @@ var BackgroundService = (function () {
     }
 
 	return {
-		updateBlockList: function (items) {
+		updateBlockList: function updateBlockList (items) {
 			if (!Array.isArray(items)) {
 				throw "Invalid value for argument 'items'. Expected array, received "
 					.concat(Object.prototype.toString.call(items));
@@ -23,7 +23,7 @@ var BackgroundService = (function () {
 
 			if (items.length > 0) {
 				var d = new Date(),
-					urlGroup = items.filter(function (e) {
+					urlGroup = items.filter(function filterUndefinedDates (e) {
 						if (typeof e.disableTill === "undefined") {
 							throw "Object date is undefined.\nThis must always be a date or an empty string."
 						}
