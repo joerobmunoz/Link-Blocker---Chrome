@@ -33,18 +33,6 @@
 
 		return this;
 	}
-	Date.prototype.toTimeRemainingString = function () {
-		if (this.hoursRemaining !== 0 || this.minutesRemaining !== 0 || this.secondsRemaining !== 0) {
-			var timeString = "";
-			if (this.hoursRemaining > 0) {
-				timeString = timeString.concat(this.hoursRemaining, " hours, ");
-			}
-		
-			return timeString.concat(this.minutesRemaining, " min, ", this.secondsRemaining, " sec")
-		} else {
-			return "";
-		}
-	}
 	
 	angular.module('LinkBlockerApp').filter('dateText', function() {
     	return function(date) {

@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="js/popup.js"></script>
 	<script type="text/javascript" src="js/date.js"></script>
 	<script type="text/javascript" src="js/storageService.js"></script>
+	<script type="text/javascript" src="js/entityService.js"></script>
 	</head>
 
   	<body>
@@ -37,27 +38,29 @@
 							<input id="site-search" class="form-control" type="text" ng-model="query" placeholder="Search...">
 					    </div>
 				    </div>
-				    <div ng-repeat="e in linkEntities | filter:query">
-				    	<div class="form-group">
-					    	<label class="control-label col-xs-2 text-right link-label">Link</label>
-					    	<div class="col-xs-9">
-						    	<input type="text" ng-disabled="true" ng-model="e.link" class="form-control">
+				    <div ng-class="query !== '' ? filtered-group">
+					    <div ng-repeat="e in linkEntities | filter:query">
+					    	<div class="form-group">
+						    	<label class="control-label col-xs-2 text-right link-label">Link</label>
+						    	<div class="col-xs-9">
+							    	<input type="text" ng-disabled="true" ng-model="e.link" class="form-control">
+								</div>
+								<div class="col-xs-1">
+									<a class="delete-link close" ng-click="delete(e.id)">&times;</a>
+								</div>
 							</div>
-							<div class="col-xs-1">
-								<a class="delete-link close" ng-click="delete(e.id)">&times;</a>
-							</div>
-						</div>
-						<div class="form-group form-group-sub">
-						    <label class="control-label col-xs-2 text-right link-label">Block?</label>
-						    <div class="col-xs-10">
-							    <button class="btn btn-primary sub-items" ng-click="updateHour(e)">+1 Hour</button>
-							    <button class="btn btn-primary sub-items" ng-click="updateMinutes(e)">+30 Min</button>
-							</div>
-					    </div>
-					    <div class="form-group form-group-sub">
-						    <div class="col-xs-8 col-xs-offset-2 sub-items">
-						    	{{e.disableTill !== "" && e.disableTill.hoursRemaining > 0 ? e.disableTill.hoursRemaining + ' hours, ' : ''}}
-						    	{{e.disableTill !== "" && !e.disableTill.expired() ? e.disableTill.minutesRemaining + ' min, ' + e.disableTill.secondsRemaining + ' sec' : ''}}
+							<div class="form-group form-group-sub">
+							    <label class="control-label col-xs-2 text-right link-label">Block?</label>
+							    <div class="col-xs-10">
+								    <button class="btn btn-primary sub-items" ng-click="updateHour(e)">+1 Hour</button>
+								    <button class="btn btn-primary sub-items" ng-click="updateMinutes(e)">+30 Min</button>
+								</div>
+						    </div>
+						    <div class="form-group form-group-sub">
+							    <div class="col-xs-8 col-xs-offset-2 sub-items">
+							    	{{e.disableTill !== "" && e.disableTill.hoursRemaining > 0 ? e.disableTill.hoursRemaining + ' hours, ' : ''}}
+							    	{{e.disableTill !== "" && !e.disableTill.expired() ? e.disableTill.minutesRemaining + ' min, ' + e.disableTill.secondsRemaining + ' sec' : ''}}
+							    </div>
 						    </div>
 					    </div>
 				    </div>
