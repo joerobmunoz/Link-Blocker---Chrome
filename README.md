@@ -1,5 +1,5 @@
 <h1>Link-Blocker - Chrome</h1>
-Link Blocker is a simple Chrome extension to assist people in being responsible for their time management.
+Link Blocker is a simple Chrome extension to assist people in being responsible with their time management.
 
 <h2>How to Use:</h2>
 <ol>
