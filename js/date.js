@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
 	Date.prototype.addHours = function addHours (h) {
     	this.setHours(this.getHours() + h);
