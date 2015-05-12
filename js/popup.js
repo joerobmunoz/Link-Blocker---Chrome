@@ -41,7 +41,7 @@
 			return e;
 		},
 		updateMinutesCallback = function updateMinutesCallback (e) {
-			e.disableTill = e.disableTill.addMinutes(1);
+			e.disableTill = e.disableTill.addMinutes(30);
 			return e;
 		}
 
