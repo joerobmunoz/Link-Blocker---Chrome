@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="css/app.css">
 
 	<script type="text/javascript" src="js/vendor/angular.js"></script>
+	<script type="text/javascript" src="js/vendor/d3.js" charset="utf-8"></script>
 	<script type="text/javascript" src="js/popup.js"></script>
 	<script type="text/javascript" src="js/date.js"></script>
 	<script type="text/javascript" src="js/storageService.js"></script>
@@ -57,9 +58,11 @@
 							</div>
 					    </div>
 					    <div class="form-group form-group-sub">
-						    <div class="col-xs-8 col-xs-offset-2 sub-items">
+						    <div class="col-xs-6 col-xs-offset-2 sub-items">
 						    	{{e.disableTill !== "" && e.disableTill.hoursRemaining > 0 ? e.disableTill.hoursRemaining + ' hours, ' : ''}}
 						    	{{e.disableTill !== "" && !e.disableTill.expired() ? e.disableTill.minutesRemaining + ' min, ' + e.disableTill.secondsRemaining + ' sec' : ''}}
+						    </div>
+						    <div id="chart" class="col-xs-6">
 						    </div>
 					    </div>
 				    </div>

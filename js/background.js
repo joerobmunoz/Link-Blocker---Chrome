@@ -4,7 +4,9 @@
 // https://developer.chrome.com/extensions/events
 
 var BackgroundService = (function () {
-	function listenerCallback () {
+	function listenerCallback (details) {
+		// Doesn't block twitter.com
+		console.log(details.url);
 		return {
 	        	cancel: true
 	    	};

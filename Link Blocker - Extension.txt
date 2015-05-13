@@ -6,7 +6,7 @@ Features:
 Set timer
 	- Blocks link until set datetime has expired
 
-Grunt workflow
+Gulp workflow
 	- File structure
 	- Minification
 	- Update Github build steps
