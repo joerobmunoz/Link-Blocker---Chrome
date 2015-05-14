@@ -3,13 +3,17 @@ Link Blocker - Extension
 
 Features:
 
-Set timer
-	- Blocks link until set datetime has expired
+SVG
+	- Update D3 when seconds increment.
 
 Gulp workflow
 	- File structure
 	- Minification
 	- Update Github build steps
+
+
+TO BE DETERMINED:
+// The below features may or may not be developed.
 
 Rules
 	- Limit time on site per day
