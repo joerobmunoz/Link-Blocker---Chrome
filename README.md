@@ -12,8 +12,12 @@ Link Blocker is a simple Chrome extension to assist people in being responsible 
 
 <h2>How to <i>Use</i>:</h2>
 <ol>
-  <li>In the upper right-hand corner of Chrome, you will see a new icon. Select it to open.</li>
+  <li>In the upper right-hand corner of Chrome, you will see a new icon. Select it to open the pop up window.</li>
   <li>You can add URLs to the list.</li>
-  <li>Once added to the list, you can increment a timer for how long access to the sites will be blocked.</li>
+  <li>Once added to the list, you can increment a timer to block access to the site for a period of time.
+    <ul>
+      <li> <strong>Important Note:</strong> After adding time to a link, you will not be able to delete it until the time has expired.</li>
+    </ul>
+  </li>
   <li>If you attempt to add an existing site, it will activate the search filter.</li>
 </ol>
