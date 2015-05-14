@@ -27,12 +27,13 @@
 		this.hoursRemaining = 0;
 		this.minutesRemaining = 0;
 		this.secondsRemaining = 0;
+		this.totalSecondsRemaining = 0;
 		if (this > d) {
-			var seconds = Math.floor(Math.abs(this.getTime() - d.getTime())/1000)
+			this.totalSecondsRemaining = Math.floor(Math.abs(this.getTime() - d.getTime())/1000)
 
-			this.minutesRemaining = Math.floor(seconds/60) % 60
-			this.hoursRemaining = Math.floor(seconds/3600);
-			this.secondsRemaining = seconds % 60;
+			this.minutesRemaining = Math.floor(this.totalSecondsRemaining/60) % 60
+			this.hoursRemaining = Math.floor(this.totalSecondsRemaining/3600);
+			this.secondsRemaining = this.totalSecondsRemaining % 60;
 		}
 
 		return this;

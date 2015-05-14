@@ -82,6 +82,17 @@
 			});
 		};
 
+		$scope.showDelete = function showDelete (e) {
+			console.log(typeof e.disableTill);
+			if (e.disableTill == '' || e.disableTill.expired()) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		$scope.hide = true;
+
 		// Fetch initial data
 		$scope.linkEntities = [];
 		StorageService.read(null, function readCallback (items) {

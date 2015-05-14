@@ -7,17 +7,18 @@
 <html ng-app="LinkBlockerApp" ng-csp>
 	<head>
 	<title>Link Blocker</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
 
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/app.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/app.css">
 
-	<script type="text/javascript" src="js/vendor/angular.js"></script>
-	<script type="text/javascript" src="js/vendor/d3.js" charset="utf-8"></script>
-	<script type="text/javascript" src="js/popup.js"></script>
-	<script type="text/javascript" src="js/date.js"></script>
-	<script type="text/javascript" src="js/storageService.js"></script>
-	<script type="text/javascript" src="js/entityService.js"></script>
+		<script type="text/javascript" src="js/vendor/angular.js"></script>
+		<script type="text/javascript" src="js/vendor/d3.js"></script>
+		<script type="text/javascript" src="js/popup.js"></script>
+		<script type="text/javascript" src="js/date.js"></script>
+		<script type="text/javascript" src="js/storageService.js"></script>
+		<script type="text/javascript" src="js/entityService.js"></script>
+		<script type="text/javascript" src="js/timerDirective.js"></script>
 	</head>
 
   	<body>
@@ -47,7 +48,8 @@
 						    	<input type="text" ng-disabled="true" ng-model="e.link" class="form-control">
 							</div>
 							<div class="col-xs-1">
-								<a class="delete-link close" ng-click="delete(e.id)">&times;</a>
+								<a ng-if="showDelete(e)" class="delete-link close" ng-click="delete(e.id)">&times;</a>
+								<my-timer-directive ng-if="!showDelete(e)" class="timer" ng-attr-date="e.disableTill"></my-timer-directive>
 							</div>
 						</div>
 						<div class="form-group form-group-sub">
