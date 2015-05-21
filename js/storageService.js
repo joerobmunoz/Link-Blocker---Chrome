@@ -52,7 +52,7 @@
 			},
 			update: function update (e, updateFunction, callback) {
 				if (typeof e.disableTill === "undefined" || e.disableTill <= Date()) {
-					e.disableTill = new Date();
+					e.disableTill = new Date().timeRemaining();
 				}
 
 				e = updateFunction(e);	

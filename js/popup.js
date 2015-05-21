@@ -37,13 +37,21 @@
 			$scope.$apply(updateUIArray); // Apply to force digest outside of cycle
 		},
 		updateHourCallback = function updateHourCallback (e) {
+			if (e.disableTill.expired()) {
+				e.disableTill = new Date().timeRemaining();
+			}
+
 			e.disableTill = e.disableTill.addHours(1);
 			return e;
 		},
 		updateMinutesCallback = function updateMinutesCallback (e) {
+			if (e.disableTill.expired()) {
+				e.disableTill = new Date().timeRemaining();
+			}
+
 			e.disableTill = e.disableTill.addMinutes(30);
 			return e;
-		}
+		};
 
 		$scope.create = function create (inputUrl) {
 			var urlExists = function urlExists (element) {
@@ -83,13 +91,12 @@
 		};
 
 		$scope.showDelete = function showDelete (e) {
-			console.log(typeof e.disableTill);
 			if (e.disableTill == '' || e.disableTill.expired()) {
 				return true;
 			} else {
 				return false;
 			}
-		}
+		};
 
 		$scope.hide = true;
 
@@ -102,7 +109,7 @@
 
 				for (var key in items) {
 					var ent = EntityService.generateEntity(items[key]);
-					$scope.linkEntities.push(ent)
+					$scope.linkEntities.push(ent);
 				}
 
 				addTimeInterval();
@@ -111,7 +118,7 @@
 				chrome.extension.getBackgroundPage().BackgroundService.updateBlockList($scope.linkEntities);
 			});
 		});
-	};
+	}
 
 	angular.module("LinkBlockerApp", []);
 
