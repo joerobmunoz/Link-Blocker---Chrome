@@ -12,9 +12,9 @@
 					disableTill: typeof e.disableTill === "undefined" || e.disableTill === "" ? "" : new Date(e.disableTill).timeRemaining(),
 					link: e.link,
 					startingTime: typeof e.startingTime === "undefined" || e.startingTime === "" ? "" : e.startingTime
-				}
+				};
 	 		}
-	 	}
+	 	};
 	}
 
 	angular

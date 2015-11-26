@@ -24,7 +24,7 @@
 		    .outerRadius(radius - 0);
 
 		// Destroy
-		d3.select(element[0]).select('svg').remove();
+		d3.select(element[0]).select("svg").remove();
 
 		// Append
 		var svg = d3.select(element[0]).append("svg")
@@ -38,26 +38,26 @@
 			.enter().append("path")
 		    .attr("fill", function(d, i) { return color(i); })
 		    .attr("d", arc);
-	};
+	}
 
 	function myTimerDirective ($interval) {
 		return {
-			restrict: 'EA',
-			scope: { date: '=date'},
+			restrict: "EA",
+			scope: { date: "=date"},
 			link: function ($scope, element, attrs) {
 					updateDonut(element, $scope.date); // update DOM
 					var timeoutId = $interval(function() {
 			    		updateDonut(element, $scope.date); // update DOM
 			    	}, 1000);
 
-			    	element.on('$destroy', function() { // clean up
+			    	element.on("$destroy", function() { // clean up
 				    	$interval.cancel(timeoutId);
 				    });
 				}
-			}
+			};
 	}
 
 	angular
 		.module("LinkBlockerApp")
-		.directive("myTimerDirective", ['$interval', myTimerDirective]);
+		.directive("myTimerDirective", ["$interval", myTimerDirective]);
 })();
