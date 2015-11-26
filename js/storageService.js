@@ -27,7 +27,8 @@
 					obj[id.toString()] = {
 							id: id,
 							disableTill: "",
-							link: url
+							link: url,
+							startingTime: +new Date()
 						};
 
 					// Create new object with ID
@@ -61,7 +62,8 @@
 				obj[e.id.toString()] = {
 					id: e.id,
 					disableTill: +new Date(e.disableTill), // Number casting
-					link: e.link
+					link: e.link,
+					startingTime: +new Date(e.startingTime)
 				}
 
 				chrome.storage.local.set(obj, callback);

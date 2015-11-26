@@ -6,7 +6,6 @@
 var BackgroundService = (function () {
 	function listenerCallback (details) {
 		// Doesn't block twitter.com
-		console.log(details.url);
 		return {
 	        	cancel: true
 	    	};

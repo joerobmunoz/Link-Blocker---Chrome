@@ -10,7 +10,8 @@
 					id: e.id,
 					// Chrome local storage will not fetch empty strings.
 					disableTill: typeof e.disableTill === "undefined" || e.disableTill === "" ? "" : new Date(e.disableTill).timeRemaining(),
-					link: e.link
+					link: e.link,
+					startingTime: typeof e.startingTime === "undefined" || e.startingTime === "" ? "" : e.startingTime
 				}
 	 		}
 	 	}

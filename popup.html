@@ -31,7 +31,7 @@
 					    <div class="col-xs-8">
 					    	<input id="addUrl" ng-model="newLink" type="text" class="form-control" placeholder="blockme.com">
 				    	</div>
-					    <button ng-click="create(newLink)" class="btn btn-primary" class="col-xs-2">Add</button>
+					    <button ng-click="create(newLink)" class="btn btn-primary" class="col-xs-2">&plus;</button>
 				    </div>
 				    <div class="horizontal-separator form-group"></div>
 				    <div class="form-group">
@@ -49,7 +49,7 @@
 							</div>
 							<div class="col-xs-1">
 								<a ng-if="showDelete(e)" class="delete-link close" ng-click="delete(e.id)">&times;</a>
-								<my-timer-directive ng-if="!showDelete(e)" class="timer" ng-attr-date="e.disableTill"></my-timer-directive>
+								<my-timer-directive ng-if="!showDelete(e)" class="timer" ng-attr-date="e"></my-timer-directive>
 							</div>
 						</div>
 						<div class="form-group form-group-sub">
